@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Contact V14</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<style>
+		.container-contact100 {
+			background-color: black !important;
+		}
+
+	</style>
+<!--===============================================================================================-->
+</head>
+<body>
+
+
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form">
+				<span class="contact100-form-title">
+					Contact Us
+				</span>
+
+
+				<label class="label-input100" for="phone"> Quantité à acheter</label>
+				<div class="wrap-input100">
+					<input id="qty" class="input100" type="number">
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="phone">Prix</label>
+				<div class="wrap-input100">
+					<input id="price" class="input100" type="number">
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="phone">Commision d'achat de Coinbase en %</label>
+				<div class="wrap-input100">
+					<input id="fee" class="input100" type="number">
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="phone">Marge voulue en %</label>
+				<div class="wrap-input100">
+					<input id="marge" class="input100" type="number">
+					<span class="focus-input100"></span>
+				</div>
+
+		Prix sans les frais de transactions: <span class="contact100-form-title" id="totalNoFee"></span>
+		    
+		    Total avec les frais de transactions: <span class="contact100-form-title" id="totalWithFee"></span>
+
+		  Prix pour vendre sans perte: <span class="contact100-form-title" id="priceWithoutPert"></span>
+
+		    Prix pour vendre avec marge: <span class="contact100-form-title" id="priceWithMarge"></span>
+				
+			</form>
+		</div>
+	</div>
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+<script type="text/javascript">
+
+$('#qty, #price, #fee, #marge').change(function () {
+    
+   
+     var qty = $('#qty').val();
+     var price = $('#price').val();
+     var fee = $('#fee').val();
+     var marge = $('#marge').val();
+     var totalNoFee = qty*price;
+     var feeCost = totalNoFee*fee / 100;
+     var totalWithFee = feeCost + totalNoFee;
+     var priceWithoutPert = totalWithFee / qty;
+     var priceWithMarge = (priceWithoutPert * marge / 100) + priceWithoutPert;
+
+    $("#totalNoFee").html(totalNoFee);
+    $("#totalWithFee").html(totalWithFee);
+    $("#priceWithoutPert").html(priceWithoutPert);
+    $("#priceWithMarge").html(priceWithMarge);
+    $("#margeVoulue").html(marge);
+
+});
+
+
+</script>
+
+
+</body>
+</html>
