@@ -56,9 +56,15 @@
 					<span class="focus-input100"></span>
 				</div>
 
-				<label class="label-input100" for="phone">Commision d'achat de Coinbase en %</label>
+				<label class="label-input100" for="phone">Commission d'achat de Coinbase en %</label>
 				<div class="wrap-input100">
 					<input id="fee" class="input100" type="number">
+					<span class="focus-input100"></span>
+				</div>
+
+				<label class="label-input100" for="phone">Commission de vente de Coinbase en %</label>
+				<div class="wrap-input100">
+					<input id="feeSell" class="input100" type="number">
 					<span class="focus-input100"></span>
 				</div>
 
@@ -111,22 +117,25 @@
 
 <script type="text/javascript">
 
-$('#qty, #price, #fee, #marge').change(function () {
+$('#qty, #price, #fee, #feeSell, #marge').change(function () {
     
    
      var qty = $('#qty').val();
      var price = $('#price').val();
      var fee = $('#fee').val();
-     var marge = $('#marge').val();
+	var feeSell = $('#feeSell').val();
+	var marge = $('#marge').val();
+
      var totalNoFee = qty*price;
-     var feeCost = totalNoFee*fee / 100;
-     var totalWithFee = feeCost + totalNoFee;
-     var priceWithoutPert = totalWithFee / qty;
+     var totalWithFee = (totalNoFee*fee / 100) + totalNoFee;
+	 var totalWithFeeSell = (totalWithFee * feeSell / 100) + totalWithFee;
+
+	 var priceWithoutPert = totalWithFeeSell / qty;
      var priceWithMarge = (priceWithoutPert * marge / 100) + priceWithoutPert;
 
     $("#totalNoFee").html(totalNoFee);
     $("#totalWithFee").html(totalWithFee);
-    $("#priceWithoutPert").html(priceWithoutPert);
+	$("#priceWithoutPert").html(priceWithoutPert);
     $("#priceWithMarge").html(priceWithMarge);
     $("#margeVoulue").html(marge);
 
